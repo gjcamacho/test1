@@ -74,6 +74,18 @@
     paddleOne(paddle1X, paddle1Y);
     paddleTwo(paddle2X, paddle2Y);
     
+    if(y>= paddle1Y && y<=paddle1Y + paddle1H && x==paddle1X + paddle1W ){
+      topex = false;
+      recalcularB();
+    }
+    
+    if(y>= paddle2Y && y<=paddle2Y + paddle2H && x==paddle2X  ){
+      topex = true;
+      recalcularB();
+    }
+    
+    //Paddle2 bound to AI
+    //paddle2Y=y - (paddle2H/2);
   }
   
   void recalcularB(){
@@ -105,18 +117,30 @@
   }
   
   void keyPressed(){
-   println("key pressed: " + keyCode); 
-   int deltaPos=50;
+   //println("key pressed: " + keyCode); 
+   int deltaPos=10;
    
    if(keyCode==38){
-     if(paddle1Y-50 >= 6){
+     if(paddle1Y >= 6){
        paddle1Y-=deltaPos;
      }
    }
    
    if(keyCode==40){
-     if(paddle1Y + paddle1H < screenH - 55){
+     if(paddle1Y + paddle1H < screenH - 15){
        paddle1Y+=deltaPos;
+     }
+   }
+   
+   if(keyCode==87){
+     if(paddle2Y >= 6){
+       paddle2Y-=deltaPos;
+     }
+   }
+   
+   if(keyCode==83){
+     if(paddle2Y + paddle2H < screenH - 15){
+       paddle2Y+=deltaPos;
      }
    }
   }
